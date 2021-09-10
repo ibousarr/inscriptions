@@ -28,7 +28,7 @@ class StudentFactory extends Factory
             'dateNaissance' => $this->faker->dateTimeBetween("2001-01-01", "2010-12-30"),
             'lieuNaissance' => $this->faker->city,
             'sexe'          => ['M', 'F'][mt_rand(0,1)],
-            'matricule'     => $this->faker->numberBetween(3,10),
+            'matricule'     => $this->faker->randomDigitNotZero(),
             'photo'         => 'default.png',
             'provenance'    => $this->faker->name,
             'pere'          => $this->faker->name,
