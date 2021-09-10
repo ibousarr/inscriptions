@@ -4,14 +4,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ config('app.name', 'Kis@rrWeb') }} | Gestion des inscriptions</title>
+  <title>{{ config('app.name', 'Kis@rrWeb') }} | {{ config('setting.etablissement') }} | Gestion des inscriptions</title>
 
     <link rel="stylesheet" href="{{mix('css/app.css')}}" />
 
     @livewireStyles
 
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition">
 <div class="wrapper">
 
   <!-- Navbar -->
@@ -33,7 +33,7 @@
               <img src="{{asset('images/ibousarr.jpg')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ userFullName() }}<br>{{getRolesName()}}</a>
+          <a href="#" class="d-block">{{ userFullName() }}</a>
         </div>
       </div>
 
@@ -74,7 +74,7 @@
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2021 <a href="https://adminlte.io">Codeurspassionnes.com</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2021 <a href="{{ config('setting.site') }}">{{ config('setting.site') }}</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->

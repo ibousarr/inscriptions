@@ -1,7 +1,5 @@
 <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
             <a href="{{ route('home') }}" class="nav-link {{ setMenuActive('home') }}">
               <i class="nav-icon fas fa-home"></i>
@@ -9,9 +7,9 @@
                 Accueil
               </p>
             </a>
-          </li>
+        </li>
 
-        @can("gestionnaire")
+        @can("superadmin")
         <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -46,22 +44,76 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">                
+                  <li class="nav-item ">
+                        <a
+                        href="{{ route('admin.habilitations.users.index') }}"
+                        class="nav-link {{ setMenuActive('admin.habilitations.users.index') }}"
+                        >
+                              <i class=" nav-icon fas fa-users-cog"></i>
+                              <p>Utilisateurs</p>
+                        </a>
+                  </li>
+                  <li class="nav-item">
+                        <a href="#" class="nav-link">
+                              <i class="nav-icon fas fa-fingerprint"></i>
+                              <p>Roles et permissions</p>
+                        </a>
+                  </li>
+            </ul>
+        </li>
+
+        <li class="nav-item {{ setMenuClass('admin.classes.', 'menu-open') }}">
+            <a href="#" class="nav-link {{ setMenuClass('admin.classes.', 'active') }}">
+                <i class="nav-icon fas fa-sitemap"></i>
+                <p>
+                Gestion classes
+                <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item ">
-                <a
-                href="{{ route('admin.habilitations.users.index') }}"
-                class="nav-link {{ setMenuActive('admin.habilitations.users.index') }}"
-                >
-                  <i class=" nav-icon fas fa-users-cog"></i>
-                  <p>Utilisateurs</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-fingerprint"></i>
-                  <p>Roles et permissions</p>
-                </a>
-              </li>
+                <li class="nav-item">
+                    <a 
+                        href="{{ route('admin.classes.index') }}" 
+                        class="nav-link {{ setMenuActive('admin.classes.index') }}"
+                    >
+                    <i class="nav-icon fas fa-list-ul"></i>
+                    <p>Classes</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-sliders-h"></i>
+                        <p>Listes</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item {{ setMenuClass('admin.students.', 'menu-open') }}">
+            <a href="#" class="nav-link {{ setMenuClass('admin.students.', 'active') }}">
+                <i class="nav-icon fas fa-pen"></i>
+                <p>
+                Gestion Elèves
+                <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a 
+                        href="{{ route('admin.students.index') }}" 
+                        class="nav-link {{ setMenuActive('admin.students.index') }}"
+                    >
+                    <i class="nav-icon fas fa-list-ul"></i>
+                    <p>Liste des élèves</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-sliders-h"></i>
+                        <p>#####</p>
+                    </a>
+                </li>
             </ul>
         </li>
 
@@ -91,7 +143,9 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-sliders-h"></i>
+                        <i class="nav-icon fas fa-sliders-h"></i>
+                    </a>
+                </li>
             </ul>
         </li>
         @endcan
@@ -125,6 +179,5 @@
             </a>
         </li>
         @endcan
-
-        </ul>
-      </nav>
+    </ul>
+</nav>

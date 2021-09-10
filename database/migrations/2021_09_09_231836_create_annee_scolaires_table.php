@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClasseRoomsTable extends Migration
+class CreateAnneeScolairesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateClasseRoomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('classe_rooms', function (Blueprint $table) {
+        Schema::create('annee_scolaires', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('refClasse')->unique();
-            $table->string('libClasse');
-            $table->integer('nbTables')->nullable();
-            $table->timestamps();
+            $table->string('annee')->unique();
         });
     }
 
@@ -29,6 +26,6 @@ class CreateClasseRoomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classe_rooms');
+        Schema::dropIfExists('annee_scolaires');
     }
 }

@@ -15,6 +15,7 @@ class CreateInscriptionsTable extends Migration
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("annee_scolaire_id")->constrained();
             $table->foreignId("type_inscription_id")->constrained();
             $table->foreignId("user_id")->constrained();
             $table->foreignId("student_id")->constrained();

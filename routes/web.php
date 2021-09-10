@@ -3,7 +3,9 @@
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Utilisateurs;
 use App\Http\Livewire\Articles;
+use App\Http\Livewire\Classes\ClasseRooms;
 use App\Models\Article;
+use App\Http\Livewire\Students\Students;
 use App\Models\TypeArticle;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +47,20 @@ Route::group([
         "as"     => "articles."   
     ], function(){
         Route::get('articles', Articles::class)->name('articles.index');
+    });
+
+    Route::group([
+        "prefix" => "classes",
+        "as"     => "classes."   
+    ], function(){
+        Route::get('classes', ClasseRooms::class)->name('index');
+    });
+
+    Route::group([
+        "prefix" => "students",
+        "as"     => "students."   
+    ], function(){
+        Route::get('students', Students::class)->name('index');
     });
 
 
