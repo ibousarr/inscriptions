@@ -5,6 +5,12 @@ namespace App\Http\Livewire\Students;
 use Livewire\Component;
 use App\Models\Student;
 use App\Models\Inscription;
+use App\Models\classeRoom;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+
 use Livewire\WithPagination;
 
 
@@ -18,11 +24,15 @@ class Students extends Component
 
     public $newStudent = [];
     public $editStudent = [];
+    public $quelleClasse = "";
 
     public function render()
     {
+    	$classeId = $this->quelleClasse;
+    	$param = '%'.$classeId.'%';
         return view('livewire.students.index', [
-        	'inscriptions' => Inscription::with(['student'])->orderBy('classe_room_id','asc')->paginate(5)
+        	'classes'	=>	classeRoom::all(),
+        	'inscriptions' => Inscription::with(['student'])->whereRelation('classeRoom', 'libClasse', 'like', $param)->paginate(5)
         ])
         ->extends("layouts.master")
         ->section("contenu");
@@ -43,7 +53,7 @@ class Students extends Component
                 'editStudent.dateNaissance' => 'nullable',
                 'editStudent.lieuNaissance' => 'nullable',
                 'editStudent.sexe' => 'required',
-                'editStudent.matricule'  =>	['required', 'string', Rule::unique("students", "matricule")->ignore($this->editStudent['id']) ] ,
+                'editStudent.matricule'  =>	['required', Rule::unique("students", "matricule")->ignore($this->editStudent["id"]) ] ,
 				'editStudent.photo'  =>	'nullable',
 				'editStudent.provenance'  =>	'nullable',
 				'editStudent.pere'  =>	'nullable',
@@ -102,7 +112,7 @@ class Students extends Component
         // Vérifier que les informations envoyées par le formulaire sont correctes
         $validationAttributes = $this->validate();
 
-
+       // dd($this->editStudent["id"]);
         Student::find($this->editStudent["id"])->update($validationAttributes["editStudent"]);
 
         $this->dispatchBrowserEvent("showSuccessMessage", ["message"=>"Données mises à jour avec succès!"]);

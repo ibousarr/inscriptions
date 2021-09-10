@@ -10,7 +10,7 @@ class Student extends Model
     use HasFactory;
 
     protected $casts = [
-        'dateNaissance' => 'datetime',
+        'dateNaissance' => 'date:d-m-Y',
     ];
 
     protected $fillable = [
