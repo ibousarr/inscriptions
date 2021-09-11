@@ -3,7 +3,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title"><i class="fas fa-sitemap-plus fa-2x"></i> Formulaire d'édition d'une nouvellle classe</h3>
+                <h3 class="card-title"><i class="fas fa-sitemap-plus fa-2x"></i> Formulaire d'édition : {{$this->editStudent['prenoms']}} {{$this->editStudent['nom']}}</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -38,11 +38,8 @@
                                 value="{{Carbon\Carbon::parse($editStudent['dateNaissance'])->format('m/d/Y')}}"
                             > -->
                             <input 
-                                wire:model="editStudent.dateNaissance"
+                                wire:model.lazy="editStudent.dateNaissance"
                                 type="text" class="form-control datepicker" placeholder="Date de Naissance" autocomplete="off"
-                                data-provide="datepicker" data-date-autoclose="true" 
-                                data-date-format="mm/dd/yyyy" data-date-today-highlight="true"                        
-                                onchange="this.dispatchEvent(new InputEvent('input'))"
                                >
                             @error("editStudent.dateNaissance")
                                 <span class="text-danger">{{ $message }}</span>

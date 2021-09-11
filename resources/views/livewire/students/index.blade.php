@@ -42,7 +42,7 @@
         }).then((result) => {
         if (result.isConfirmed) {
             if(event.detail.message.data){
-                @this.deleteClasse(event.detail.message.data.student_id)
+                @this.deleteStudent(event.detail.message.data.student_id)
             }
         }
         })

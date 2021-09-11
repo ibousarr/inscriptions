@@ -39,4 +39,22 @@ class Student extends Model
 
         return $this->prenoms .' '. $this->nom;
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($student) {
+            $student->inscription()->create([
+                'annee_scolaire_id' => 2,
+                'type_inscription_id'   => 1,
+                'user_id'   => auth()->user()->id,
+                'student_id'    => $student->id,
+                'classe_room_id'    => 1,
+                'statut_inscription_id' => 1,
+            ]);
+
+           // Mail::to($user->email)->send(new NewUserWelcomeMail());
+        });
+    }
 }

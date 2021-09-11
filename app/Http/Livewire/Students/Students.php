@@ -101,6 +101,8 @@ class Students extends Component
         $this->newStudent = [];
 
         $this->dispatchBrowserEvent("showSuccessMessage", ["message"=>"L'élève est créé avec succès!"]);
+
+        $this->currentPage = PAGELIST;
     }
 
     public function goToEditStudent($id){
@@ -126,7 +128,7 @@ class Students extends Component
     public function confirmDelete($name, $id){
 
         $this->dispatchBrowserEvent("showConfirmMessage", ["message"=> [
-            "text" => "Vous êtes sur le point de supprimer $name de la liste des classes. Voulez-vous continuer?",
+            "text" => "Vous êtes sur le point de supprimer $name de la liste des élèves. Voulez-vous continuer?",
             "title" => "Êtes-vous sûr de continuer?",
             "type" => "warning",
             "data" => [
@@ -136,11 +138,15 @@ class Students extends Component
     }
 
     public function deleteStudent($id){
+
+    	$inscrit = Inscription::whereRelation('student', 'student_id', $id)->firstOrFail();
+
+    	$inscrit->delete();
     	
         Student::destroy($id);
 
         $this->dispatchBrowserEvent("showSuccessMessage", ["message"=>"Elève supprimé avec succès!"]);
 
-       goToListStudent();
+       $this->currentPage = PAGELIST;
     }
 }

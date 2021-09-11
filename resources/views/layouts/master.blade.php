@@ -71,7 +71,7 @@
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      Anything you want
+      <b>Anything you want can be done</b>
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2021 <a href="{{ config('setting.site') }}">{{ config('setting.site') }}</a>.</strong> All rights reserved.

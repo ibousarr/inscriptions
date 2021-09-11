@@ -9,6 +9,17 @@ class Inscription extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+
+        'annee_scolaire_id',
+        'type_inscription_id',
+        'user_id',
+        'student_id',
+        'classe_room_id',
+        'statut_inscription_id',
+        'dossier'
+    ];
+
 
     public function type(){
         return $this->belongsTo(TypeInscription::class, "type_inscription_id", "id");
