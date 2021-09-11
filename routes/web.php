@@ -6,6 +6,7 @@ use App\Http\Livewire\Articles;
 use App\Http\Livewire\Classes\ClasseRooms;
 use App\Models\Article;
 use App\Http\Livewire\Students\Students;
+use App\Http\Livewire\Inscriptions\Inscriptions;
 use App\Models\TypeArticle;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -60,7 +61,14 @@ Route::group([
         "prefix" => "students",
         "as"     => "students."   
     ], function(){
-        Route::get('students', Students::class)->name('index');
+        Route::get('liste', Students::class)->name('index');
+    });
+
+    Route::group([
+        "prefix" => "students",
+        "as"     => "inscriptions."   
+    ], function(){
+        Route::get('caisse', Inscriptions::class)->name('index');
     });
 
 

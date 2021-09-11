@@ -21,7 +21,7 @@
       <form method="POST" action="{{ route('login') }}">
         @csrf
         <div class="input-group mb-3">
-          <input type="text" placeholder="Phone" class="form-control @error('email') is-invalid @enderror" name="telephone1" value="{{ old('telephone1') }}" required autocomplete="telephone1" autofocus >
+          <input type="text" placeholder="Email ou Téléphone" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="login" autofocus >
 
           <div class="input-group-append">
             <div class="input-group-text">

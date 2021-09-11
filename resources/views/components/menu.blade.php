@@ -9,7 +9,7 @@
             </a>
         </li>
 
-        @can("superadmin")
+        
         <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -33,9 +33,9 @@
               </li>
             </ul>
         </li>
-        @endcan
+        
 
-        @can("admin")
+       
         <li class="nav-item {{ setMenuClass('admin.habilitations.', 'menu-open') }}">
             <a href="#" class="nav-link {{ setMenuClass('admin.habilitations.', 'active') }}">
               <i class=" nav-icon fas fa-user-shield"></i>
@@ -90,8 +90,8 @@
             </ul>
         </li>
 
-        <li class="nav-item {{ setMenuClass('admin.students.', 'menu-open') }}">
-            <a href="#" class="nav-link {{ setMenuClass('admin.students.', 'active') }}">
+        <li class="nav-item {{ setMenuClass('admin.students.', 'menu-open') }} {{ setMenuClass('admin.inscriptions.', 'menu-open') }}">
+            <a href="#" class="nav-link {{ setMenuClass('admin.students.', 'active') }} {{ setMenuClass('admin.inscriptions.', 'active') }}">
                 <i class="nav-icon fas fa-pen"></i>
                 <p>
                 Gestion Elèves
@@ -109,75 +109,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-sliders-h"></i>
-                        <p>#####</p>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
-        <li class="nav-item {{ setMenuClass('admin.articles.', 'menu-open') }}">
-            <a href="#" class="nav-link {{ setMenuClass('admin.articles.', 'active') }}">
-                <i class="nav-icon fas fa-cogs"></i>
-                <p>
-                Gestion articles
-                <i class="right fas fa-angle-left"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="#" class="nav-link ">
-                    <i class="nav-icon far fa-circle"></i>
-                    <p>Type d'articles</p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a 
-                        href="{{ route('admin.articles.articles.index') }}" 
-                        class="nav-link {{ setMenuActive('admin.articles.articles.index') }}"
-                    >
-                    <i class="nav-icon fas fa-list-ul"></i>
-                    <p>Articles</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                        href="{{ route('admin.inscriptions.index') }}" 
+                        class="nav-link {{ setMenuActive('admin.inscriptions.index') }}">
                         <i class="nav-icon fas fa-sliders-h"></i>
+                        <p>Liste des inscriptions</p>
                     </a>
                 </li>
             </ul>
-        </li>
-        @endcan
-
-        @can("employe")
-        <li class="nav-header">LOCATION</li>
-        <li class="nav-item">
-            <a href="" class="nav-link ">
-                <i class="nav-icon fas fa-users"></i>
-                <p>
-                Gestion des clients
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-exchange-alt"></i>
-                <p>
-                Gestion des locations
-                </p>
-            </a>
-        </li>
-
-        <li class="nav-header">CAISSE</li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-coins"></i>
-                <p>
-                Gestion des paiements
-                </p>
-            </a>
-        </li>
-        @endcan
+        </li>        
     </ul>
 </nav>
