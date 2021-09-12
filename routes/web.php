@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EssaiController;
 use App\Http\Livewire\Utilisateurs;
 use App\Http\Livewire\Articles;
 use App\Http\Livewire\Classes\ClasseRooms;
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('/essai', EssaiController::class);
 
 // Le groupe des routes relatives aux administrateurs uniquement
 Route::group([
