@@ -110,6 +110,6 @@ class ClasseRooms extends Component
 
         $this->dispatchBrowserEvent("showSuccessMessage", ["message"=>"Classe supprimée avec succès!"]);
 
-       goToListClasse();
+       $this->currentPage = PAGELIST;
     }
 }

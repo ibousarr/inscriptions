@@ -14,11 +14,11 @@
                     <div class="input-group block float-right" style="width: 550px;">
                         <label class="form-control text-right">Afficher les élèves de la classe =></label>
                         <select class="outline-none" wire:model="quelleClasse">
-                                <option value="">---------</option>
-                                @foreach($classes as $classe)
-                                    <option value="{{$classe->libClasse}}">{{$classe->libClasse}}</option>
-                                @endforeach
-                            </select>
+                            <option value="">---------</option>
+                            @foreach($classes as $classe)
+                                <option value="{{$classe->libClasse}}">{{$classe->libClasse}}</option>
+                            @endforeach
+                        </select>
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-default">
                                 <i class="fas fa-search"></i>
@@ -46,7 +46,7 @@
                         @foreach($inscriptions as $inscription)
                             <tr>
                                 <td>
-                                  <img width="30%" src="{{ $inscription->student->photo }}" alt="Photo">
+                                  <img width="30%" src="{{ $inscription->student->photo }}" alt="{{ $inscription->student->id }}">
                                 </td>
                                 <td>{{ $inscription->student->nomComplet() }}</td>
                                 <td class="text-left">{{ $inscription->student->dateNaissance->format('d/m/Y') }}</td>
@@ -54,11 +54,15 @@
                                 <td>{{ $inscription->classeRoom->libClasse }} </td>
                                 <td class="text-center">
                                     <button class="btn btn-link" wire:click="goToEditStudent({{$inscription->student->id}})"> <i class="far fa-edit"></i> </button>
-                                    @can('admin')
-                                      <button class="btn btn-link text-danger" wire:click="confirmDelete('{{ $inscription->student->nomComplet() }}', {{$inscription->student->id}})">
-                                        <i class="far fa-trash-alt"></i>
-                                      </button>
-                                    @endcan
+                                    
+                                  <button class="btn btn-link text-danger" wire:click="confirmDelete('{{ $inscription->student->nomComplet() }}', {{$inscription->student->id}})">
+                                    <i class="far fa-trash-alt"></i>
+                                  </button>
+
+                                  <button class="btn btn-link text-info" wire:click="showModalAbsence('{{ $inscription->student->nomComplet() }}', {{$inscription->student->id}}, {{ $inscription->classeRoom->id}})">
+                                    <i class="fas fa-pen"></i>
+                                  </button>
+                                    
                                 </td>
                             </tr>
                         @endforeach

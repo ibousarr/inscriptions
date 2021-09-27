@@ -66,7 +66,6 @@
   <!-- Control Sidebar -->
   <x-sidebar />
   <!-- /.control-sidebar -->
-
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->

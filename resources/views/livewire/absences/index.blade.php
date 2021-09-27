@@ -1,17 +1,19 @@
 <div wire:ignore.self>
-
     @if($currentPage == PAGECREATEFORM)
-         @include("livewire.inscriptions.create")
+         @include("livewire.absences.create")
     @endif
 
     @if($currentPage == PAGEEDITFORM)
-        @include("livewire.inscriptions.edit")
+        @include("livewire.absences.edit")
     @endif
 
     @if($currentPage == PAGELIST)
-        @include("livewire.inscriptions.liste")
+        @include("livewire.absences.liste")
     @endif
 
+    @if($currentPage == PAGEVOIR)
+        @include("livewire.absences.voir")
+    @endif
 </div>
 
 <script>
@@ -21,8 +23,8 @@
                 icon: 'success',
                 toast:true,
                 title: event.detail.message || "Opération effectuée avec succès!",
-                showConfirmButton: false,
-                timer: 10000
+                showConfirmButton: true,
+                timer: 5000
                 }
             )
     })
@@ -42,11 +44,9 @@
         }).then((result) => {
         if (result.isConfirmed) {
             if(event.detail.message.data){
-                @this.deleteInscription(event.detail.message.data.inscription_id)
+                @this.deleteAbsence(event.detail.message.data.absence_id)
             }
         }
         })
     })
-
 </script>
-

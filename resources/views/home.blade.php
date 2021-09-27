@@ -13,7 +13,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3></h3>
+                    <h3>25</h3>
 
                     <p>Visits Today</p>
                 </div>
@@ -27,7 +27,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3></h3>
+                    <h3>124</h3>
 
                     <p>Visits This Month</p>
                 </div>
@@ -41,7 +41,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3></h3>
+                    <h3>231</h3>
 
                     <p>Total Visits</p>
                 </div>

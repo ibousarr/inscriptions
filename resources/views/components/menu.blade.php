@@ -90,8 +90,14 @@
             </ul>
         </li>
 
-        <li class="nav-item {{ setMenuClass('admin.students.', 'menu-open') }} {{ setMenuClass('admin.inscriptions.', 'menu-open') }}">
-            <a href="#" class="nav-link {{ setMenuClass('admin.students.', 'active') }} {{ setMenuClass('admin.inscriptions.', 'active') }}">
+        <li class="nav-item 
+                  {{ setMenuClass('admin.students.', 'menu-open') }} 
+                  {{ setMenuClass('admin.inscriptions.', 'menu-open') }} "
+        >
+            <a href="#" class="nav-link 
+                        {{ setMenuClass('admin.students.', 'active') }} 
+                        {{ setMenuClass('admin.inscriptions.', 'active') }}"
+            >
                 <i class="nav-icon fas fa-pen"></i>
                 <p>
                 Gestion Elèves
@@ -111,11 +117,37 @@
                 <li class="nav-item">
                     <a 
                         href="{{ route('admin.inscriptions.index') }}" 
-                        class="nav-link {{ setMenuActive('admin.inscriptions.index') }}">
-                        <i class="nav-icon fas fa-sliders-h"></i>
-                        <p>Liste des inscriptions</p>
+                        class="nav-link {{ setMenuActive('admin.inscriptions.index') }}"
+                    >
+                    <i class="nav-icon fas fa-sliders-h"></i>
+                    <p>Liste des inscriptions</p>
                     </a>
                 </li>
+            </ul>
+        </li>
+        <li class="nav-item 
+                  {{ setMenuClass('admin.absences.', 'menu-open') }}"
+        >
+            <a href="#" class="nav-link 
+                        {{ setMenuClass('admin.absences.', 'active') }}"
+            >
+                <i class="nav-icon fas fa-pen"></i>
+                <p>
+                Gestion des absences
+                <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a 
+                        href="{{ route('admin.absences.index') }}" 
+                        class="nav-link {{ setMenuActive('admin.absences.index') }}"
+                    >
+                    <i class="nav-icon fas fa-list-ul"></i>
+                    <p>Liste des absences</p>
+                    </a>
+                </li>
+            
             </ul>
         </li>        
     </ul>

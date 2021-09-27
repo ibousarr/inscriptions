@@ -1,5 +1,5 @@
 <div class="row p-4 pt-5">
-            <div class="col-md-8 mx-auto">
+            <div class="col-md-8">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
@@ -154,3 +154,5 @@
 
           </div>
         </div>
+
+

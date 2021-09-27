@@ -11,7 +11,13 @@ class ClasseRoom extends Model
 
     protected $fillable = ['refClasse', 'libClasse', 'nbTables'];
 
-    public function inscriptions(){
+    public function absences()
+    {
+        return $this->hasMany(Absence::class);
+    }
+    
+    public function inscriptions()
+    {
         return $this->hasMany(Inscription::class);
     }
 }

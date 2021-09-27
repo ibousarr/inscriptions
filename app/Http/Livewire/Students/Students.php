@@ -5,11 +5,13 @@ namespace App\Http\Livewire\Students;
 use Livewire\Component;
 use App\Models\Student;
 use App\Models\Inscription;
-use App\Models\classeRoom;
+use App\Models\ClasseRoom;
+use App\Models\Absence;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 use Livewire\WithPagination;
 
@@ -23,7 +25,12 @@ class Students extends Component
     public $currentPage = PAGELIST;
 
     public $newStudent = [];
+    public $newAbsence = [];
     public $editStudent = [];
+    public $absenceName;
+    public $absenceStudent;
+    public $absenceClasse;
+    public $absenceUser;
     public $quelleClasse = "";
 
     public function render()
@@ -40,7 +47,7 @@ class Students extends Component
 
     public function goToListStudent(){
         $this->currentPage = PAGELIST;
-        $this->editClasse = [];
+        $this->editStudent = [];
     }
 
     public function rules(){
@@ -53,7 +60,7 @@ class Students extends Component
                 'editStudent.dateNaissance' => 'nullable',
                 'editStudent.lieuNaissance' => 'nullable',
                 'editStudent.sexe' => 'required',
-                'editStudent.matricule'  =>	['required', Rule::unique("students", "matricule")->ignore($this->editStudent["id"]) ] ,
+                'editStudent.matricule'  =>	['required', Rule::unique("students", "matricule")->ignore($this->editStudent['id']) ] ,
 				'editStudent.photo'  =>	'nullable',
 				'editStudent.provenance'  =>	'nullable',
 				'editStudent.pere'  =>	'nullable',
@@ -124,12 +131,68 @@ class Students extends Component
 
     }
 
+    public function showModalAbsence($name, $studentId, $classeId)
+    {
+        //dd($studentId);
+        $this->absenceClasse = $classeId;
+        $this->absenceName = $name;
+        $this->absenceStudent = $studentId;
+        $this->absenceUser = auth()->user()->id;
+        //$classesAbsence = ClasseRoom::where('id',$classeId)->get();
+        
+        $this->dispatchBrowserEvent("showAbsenceModal", []);
+    }
+
+    public function addAbsence()
+    {
+        
+        
+
+        $validated = $this->validate([
+            'newAbsence.type'       =>  'required',
+            'newAbsence.dateDebut'  =>  'required', 
+            'newAbsence.dateFin'    =>  'nullable', 
+            'newAbsence.heureDeb'   =>  'required', 
+            'newAbsence.heureFin'   =>  'required', 
+            'newAbsence.nbJours'    =>  'nullable', 
+            'newAbsence.nbHeures'   =>  'nullable',
+
+        ]);
+
+
+
+        Absence::create(
+            [
+                'user_id'           =>  $this->absenceUser, 
+                'student_id'        =>  $this->absenceStudent, 
+                'classe_room_id'    =>  $this->absenceClasse,
+                'type'              =>  $this->newAbsence['type'], 
+                'dateDebut'         =>  $this->newAbsence['dateDebut'], 
+                'dateFin'           =>  $this->newAbsence['dateFin'], 
+                'heureDeb'          =>  $this->newAbsence['heureDeb'], 
+                'heureFin'          =>  $this->newAbsence['heureFin'], 
+                'nbJours'           =>  $this->newAbsence['nbJours'], 
+                'nbHeures'          =>  $this->newAbsence['nbHeures'],
+                              
+            ]
+        );
+
+        $this->newAbsence = [];
+        $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Votre a été validée avec succès!"]);
+        $this->closeModal();
+
+    }
+
+    public function closeModal(){
+        $this->dispatchBrowserEvent("showAbsenceModal", []);
+    }
+
 
     public function confirmDelete($name, $id){
 
         $this->dispatchBrowserEvent("showConfirmMessage", ["message"=> [
-            "text" => "Vous êtes sur le point de supprimer $name de la liste des élèves. Voulez-vous continuer?",
-            "title" => "Êtes-vous sûr de continuer?",
+            "text" => "Vous êtes sur le point de supprimer $name de la liste des élèves. Voulez-vous continuer ?",
+            "title" => "Êtes-vous sûr de vouloir continuer la suppression?",
             "type" => "warning",
             "data" => [
                 "student_id" => $id

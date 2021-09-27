@@ -3,6 +3,14 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\{
+    AnneeScolaire,
+    TypeInscription,
+    StatutInscription,
+    ClasseRoom,
+    Student,
+    User,
+};
 
 class CreateInscriptionsTable extends Migration
 {
@@ -15,12 +23,12 @@ class CreateInscriptionsTable extends Migration
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("annee_scolaire_id")->constrained();
-            $table->foreignId("type_inscription_id")->constrained();
-            $table->foreignId("user_id")->constrained();
-            $table->foreignId("student_id")->constrained();
-            $table->foreignId("classe_room_id")->constrained();
-            $table->foreignId("statut_inscription_id")->constrained();
+            $table->foreignIdFor(AnneeScolaire::class)->constrained();
+            $table->foreignIdFor(TypeInscription::class)->constrained();
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Student::class)->constrained();
+            $table->foreignIdFor(ClasseRoom::class)->constrained();
+            $table->foreignIdFor(StatutInscription::class)->constrained();
             $table->text('dossier');
             $table->timestamps();
         });

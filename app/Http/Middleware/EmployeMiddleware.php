@@ -17,7 +17,7 @@ class EmployeMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Gate::allows("employe")){
+        if(Gate::allows("employe") || Gate::allows("superadmin")){
             return $next($request);
         }
         return redirect()->route("home");

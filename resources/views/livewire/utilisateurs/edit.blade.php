@@ -164,7 +164,7 @@
                                                     @if($permission["active"]) checked @endif
                                                     wire:model.lazy="rolePermissions.permissions.{{$loop->index}}.active"
                                                     id="customSwitchPermission{{$permission['permission_id']}}">
-                                                <label class="custom-control-label" for="customSwitchPermission{{$permission['permission_id']}}"> {{ $permission["active"]? "Activé" : "Desactivé" }}</label>
+                                                <label class="custom-control-label" for="customSwitchPermission{{$permission['permission_id']}}"> {{ $permission["active"] ? "Activé" : "Desactivé" }}</label>
                                             </div>
                                     </td>
                                 </tr>
