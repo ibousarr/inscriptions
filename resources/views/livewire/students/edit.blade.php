@@ -35,7 +35,7 @@
                                 type="text" 
                                 wire:model="editStudent.dateNaissance" 
                                 class="form-control @error('editStudent.dateNaissance') is-invalid @enderror"
-                                value="{{Carbon\Carbon::parse($editStudent['dateNaissance'])->format('m/d/Y')}}"
+                                value="{{Carbon\Carbon::parse($editStudent['dateNaissance'])->format('d/M/Y')}}"
                             > -->
                             <input 
                                 wire:model.lazy="editStudent.dateNaissance"

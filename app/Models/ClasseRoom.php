@@ -9,7 +9,7 @@ class ClasseRoom extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['refClasse', 'libClasse', 'nbTables'];
+    protected $fillable = ['refClasse', 'libClasse', 'niveau', 'nbTables'];
 
     public function absences()
     {

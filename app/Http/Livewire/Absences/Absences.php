@@ -8,7 +8,12 @@ use App\Models\Absence;
 use App\Models\Student;
 use App\Models\Inscription;
 use App\Models\ClasseRoom;
+use App\Exports\StudentsExport;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
 
@@ -30,17 +35,39 @@ class Absences extends Component
     public $quelleClasse="";
     public $inscriptions = [];
     public $laClasse;
+    public $classesAbsence = [];
+    public $absenceClasse;
+    public $classeName;
+    public $absenceStudent=null;
+    public $absenceUser;
+    public $student;
 
+    public function filterAbsencesByClasse($classe = null)
+    {
+        $this->resetPage();
+
+        $this->laClasse = $classe;
+        $this->inscriptionStatut = null;
+    }
 
     public function render()
     {
+
+        if($this->laClasse == null){
+            $absences = Absence::with(['student', 'classeRoom', 'user'])
+                                                ->latest()
+                                                ->paginate(5);
+        } else {
+            $absences = Absence::with(['student', 'classeRoom', 'user'])
+                                                ->where('classe_room_id', $this->laClasse)
+                                                ->latest()
+                                                ->paginate(5);
+        }
         $this->currentPage = PAGELIST;
 
         return view('livewire.absences.index', [
-                        'absences'      =>  Absence::with(['student', 'classeRoom', 'user'])
-                                                ->latest()
-                                                ->paginate(5),
-                        'classes'       =>  ClasseRoom::all(),
+                        'absences'      =>  $absences,
+                        'classes'       =>  ClasseRoom::where('refClasse', '>', 30)->get(),
                         
                     ])
                     ->extends("layouts.master")
@@ -75,49 +102,28 @@ class Absences extends Component
         //dump($this->inscriptions);
     }
 
+    protected $rules = [
 
-    public function rules()
-    {
-        if($this->currentPage == PAGEEDITFORM){
-
-            // 'required|email|unique:users,email Rule::unique("users", "email")->ignore($this->editUser['id'])
-            return [
-                'editAbsence.user_id' => 'required',
-                'editAbsence.student_id' => 'required',
-                'editAbsence.classe_room_id' => 'required',
-                'editAbsence.type' => 'required',
-                'editAbsence.debut' => 'required',
-                'editAbsence.fin' => 'required',
-                'editAbsence.nbJours' => 'nullable',
-                'editAbsence.nbHeures' => 'nullable',
-
-
-            ];
-        }
-        if($this->currentPage == PAGECREATEFORM){
-            return [
-                'newAbsence.user_id' => 'required',
-                'newAbsence.student_id' => 'required',
-                'newAbsence.classe_room_id' => 'required',
-                'newAbsence.type' => 'required',
-                'newAbsence.dateDebut' => 'required',
-                'newAbsence.dateFin' => 'nullable',
-                'newAbsence.heureDebut' => 'nullable',
-                'newAbsence.heureFin' => 'nullable',
-                'newAbsence.nbJours' => 'nullable',
-                'newAbsence.nbHeures' => 'nullable',
-            ];
-        }
-    }
-
+            'newAbsence.user_id' => 'required',
+            'newAbsence.student_id' => 'required',
+            'newAbsence.classe_room_id' => 'required',
+            'newAbsence.type' => 'required',
+            'newAbsence.dateDebut' => 'required',
+            'newAbsence.dateFin' => 'required',
+            'newAbsence.heureDeb' => 'required',
+            'newAbsence.heureFin' => 'required',
+            'newAbsence.nbJours' => 'required',
+            'newAbsence.nbHeures' => 'required',
+        ];
+    
     public function addAbsence()
     {
         
         // Vérifier que les informations envoyées par le formulaire sont correctes
-        $validationAttributes = $this->validate();
+        $validatedData = $this->validate();
        
-
-        dd($request->all());
+        //dd($$this->validatedData['newAbence.type']);
+        
         // Ajouter une nouvelle absence
         Absence::create($validationAttributes["newAbsence"]);
 
@@ -167,5 +173,97 @@ class Absences extends Component
 
        $this->currentPage = PAGELIST;
     }
+
+    public function showModalAbsence($classeId)
+    {
+        //dd($classeId);
+        $this->absenceClasse = $classeId;
+        $this->newAbsence['user_id'] = auth()->user()->id;
+        $this->newAbsence['classe_room_id'] = $classeId;
+        $this->classesAbsence = ClasseRoom::where('id',$this->absenceClasse)->first();
+        $this->classeName = $this->classesAbsence->libClasse;
+        $this->dispatchBrowserEvent("showAbsenceModal", [
+            'classeName' => $this->classeName,
+            'absenceClasse' => $this->absenceClasse,
+        ]);
+    }
+
+    public function addAbsenceClasse()
+    {
+
+        $validationAttributes = $this->validate();
+       // dd($validationAttributes["newAbsence"]);
+        Absence::create([
+
+            'user_id'           =>  $this->newAbsence['user_id'], 
+            'student_id'        =>  $this->newAbsence['student_id'], 
+            'classe_room_id'    =>  $this->newAbsence['classe_room_id'],
+            'type'              =>  $this->newAbsence['type'], 
+            'dateDebut'         =>  $this->newAbsence['dateDebut'], 
+            'dateFin'           =>  $this->newAbsence['dateFin'], 
+            'heureDeb'          =>  $this->newAbsence['heureDeb'], 
+            'heureFin'          =>  $this->newAbsence['heureFin'], 
+            'nbJours'           =>  $this->newAbsence['nbJours'], 
+            'nbHeures'          =>  $this->newAbsence['nbHeures'],
+        ]);
+
+        $this->newAbsence = [];
+        $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Votre saisie a été validée avec succès!"]);
+        $this->closeAbsenceModal();
+
+    }
+
+    public function closeAbsenceModal(){
+        $this->newAbsence = [];
+        $this->dispatchBrowserEvent("showAbsenceModal", []);
+    }
+
+    public function showEditModalAbsence($name, $classe, $absenceId)
+    {
+        $this->classeName = $classe;
+        $this->student = $name;
+        $this->editAbsence = Absence::with('student')->find($absenceId)->toArray();
+        
+        $this->dispatchBrowserEvent("showEditModal", [
+
+            'editAbsence' => $this->editAbsence,
+            'student'     => $this->student,
+            'classeName'  => $this->classeName,
+            'student'     => $this->student,
+        ]);
+    }
+
+    public function updateAbsenceClasse(){
+        // Vérifier que les informations envoyées par le formulaire sont correctes
+        //$validationAttributes = $this->validate();
+
+        $validatedData = $this->validate([
+
+            'editAbsence.type' => 'required',
+            'editAbsence.dateDebut' => 'required',
+            'editAbsence.dateFin' => 'required',
+            'editAbsence.heureDeb' => 'required',
+            'editAbsence.heureFin' => 'required',
+            'editAbsence.nbJours' => 'required',
+            'editAbsence.nbHeures' => 'required',
+        ]);
+
+        //dd($validatedData);
+
+
+        Absence::find($this->editAbsence["id"])->update($validatedData["editAbsence"]);
+
+        $this->dispatchBrowserEvent("showSuccessMessage", ["message"=>"Données mises à jour avec succès!"]);
+
+        $this->editAbsence = [];
+        $this->closeEditAbsenceModal();
+
+    }
+
+    public function closeEditAbsenceModal(){
+        $this->editAbsence = [];
+        $this->dispatchBrowserEvent("showEditModal", []);
+    }
+
 
 }

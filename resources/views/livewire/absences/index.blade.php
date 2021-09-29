@@ -14,6 +14,11 @@
     @if($currentPage == PAGEVOIR)
         @include("livewire.absences.voir")
     @endif
+
+    @include("livewire.absences.addAbsence")
+
+    @include("livewire.absences.editAbsence")
+
 </div>
 
 <script>
@@ -48,5 +53,26 @@
             }
         }
         })
+    })
+</script>
+<script>
+    window.addEventListener("showAbsenceModal", event=>{
+       $("#modalAbsence").modal({
+           "show": true,
+           "backdrop": "static"
+       })
+    })
+    window.addEventListener("showAbsenceModal", event=>{
+       $("#modalAbsence").modal("hide")
+    })
+
+    window.addEventListener("showEditModal", event=>{
+       $("#modalEditAbsence").modal({
+           "show": true,
+           "backdrop": "static"
+       })
+    })
+    window.addEventListener("showEditModal", event=>{
+       $("#modalEditAbsence").modal("hide")
     })
 </script>

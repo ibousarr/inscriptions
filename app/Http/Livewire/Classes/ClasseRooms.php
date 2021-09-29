@@ -40,6 +40,7 @@ class ClasseRooms extends Component
             return [
                 'editClasse.refClasse' => 'required',
                 'editClasse.libClasse' => 'required',
+                'editClasse.niveau' => 'nullable',
                 'editClasse.nbTables' => 'nullable',
 
             ];
@@ -48,6 +49,7 @@ class ClasseRooms extends Component
         return [
             'newClasse.refClasse' => 'required',
             'newClasse.libClasse' => 'required',
+            'newClasse.niveau' => 'nullable',
             'newClasse.nbTables' => 'nullable',
         ];
     }

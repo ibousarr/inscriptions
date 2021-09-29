@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Models\Inscription;
 use App\Models\ClasseRoom;
 use App\Models\Absence;
+use App\Exports\StudentsExport;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +15,6 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
 use Livewire\WithPagination;
-
 
 class Students extends Component
 {
@@ -33,13 +33,104 @@ class Students extends Component
     public $absenceUser;
     public $quelleClasse = "";
 
+    public $niveau = null;
+    public $inscriptionStatut=null;
+    public $selectedRows = [];
+    public $selectPageRows = false;
+    public $search=null;
+
+    public function filterStudentsByNiveau($niveau = null)
+    {
+        $this->resetPage();
+
+        $this->niveau = $niveau;
+        $this->inscriptionStatut = null;
+    }
+
+    public function updatedInscriptionStatut($value)
+    {
+        $this->inscriptionStatut = $value;
+    }
+
+    public function updatedSelectPageRows($value)
+    {
+
+        if ($value) {
+            $this->selectedRows = $this->students->pluck('id')->map(function ($id) {
+                return (string) $id;
+            });
+            
+        } else {
+            $this->reset(['selectedRows', 'selectPageRows']);
+        }
+    }
+
+    public function getStudentsProperty()
+    {
+        if($this->inscriptionStatut != null)
+        {
+            return Inscription::whereRelation('classeRoom', 'niveau', 'LIKE', '%' . $this->niveau . '%')
+                        ->whereRelation('statut', 'nom', 'LIKE', '%'.$this->inscriptionStatut.'%')
+                        ->orderBy('classe_room_id','asc')
+                        ->get();
+
+            $this->refresh();
+        }
+
+        if($this->search != null)
+        {
+            return Inscription::with('classeRoom')
+                        ->whereRelation('student', 'nom', 'LIKE', '%'.$this->search.'%')
+                        ->orWhereRelation('student', 'prenoms', 'LIKE', '%'.$this->search.'%' )
+                        ->orWhereRelation('student', 'matricule', 'LIKE', '%'.$this->search.'%' )
+                        ->orderBy('classe_room_id','asc')
+                        ->get();
+        }
+            return Inscription::with('classeRoom')
+                        ->whereRelation('classeRoom', 'niveau', 'LIKE', '%' . $this->niveau . '%')
+                        ->orderBy('classe_room_id','asc')
+                        ->get();
+        
+    }
+
+    
+    public function export()
+    {
+
+        if($this->niveau)
+        {
+            $file = 'Eleves_de_'. $this->niveau;
+        } 
+        else
+        {
+            $file = 'Eleves_du_CEM';
+        }
+        
+       
+        return (new StudentsExport($this->selectedRows))->download($file . '.pdf');
+    }
+    
+
     public function render()
     {
-    	$classeId = $this->quelleClasse;
-    	$param = '%'.$classeId.'%';
+        $students = $this->students;
+
+        $studentsCount = Inscription::count();
+        $troisiemesCount = Inscription::whereRelation('classeRoom', 'niveau', 'LIKE', 'Troisième')->count();
+        $quatriemesCount = Inscription::whereRelation('classeRoom', 'niveau', 'LIKE', 'Quatrième')->count();
+        $cinquiemesCount = Inscription::whereRelation('classeRoom', 'niveau', 'LIKE', 'Cinquième')->count();
+        $sixiemesCount = Inscription::whereRelation('classeRoom', 'niveau', 'LIKE', 'Sixième')->count();
+
+    	
         return view('livewire.students.index', [
         	'classes'	=>	classeRoom::all(),
-        	'inscriptions' => Inscription::with(['student'])->whereRelation('classeRoom', 'libClasse', 'like', $param)->paginate(5)
+        	'inscriptions' => $students,
+
+            'studentsCount'     =>  $studentsCount,
+            'troisiemesCount'   =>  $troisiemesCount,
+            'quatriemesCount'   =>  $quatriemesCount,
+            'cinquiemesCount'   =>  $cinquiemesCount,
+            'sixiemesCount'     =>  $sixiemesCount,
         ])
         ->extends("layouts.master")
         ->section("contenu");
@@ -89,7 +180,6 @@ class Students extends Component
 			'newStudent.adresse'  =>	'nullable',
         ];
     }
-
 
     public function goToAddStudent(){
     	
@@ -191,8 +281,8 @@ class Students extends Component
     public function confirmDelete($name, $id){
 
         $this->dispatchBrowserEvent("showConfirmMessage", ["message"=> [
-            "text" => "Vous êtes sur le point de supprimer $name de la liste des élèves. Voulez-vous continuer ?",
-            "title" => "Êtes-vous sûr de vouloir continuer la suppression?",
+            "text" => "Cette opération est irréversible \n Voulez-vous vraiment continuer ?",
+            "title" => "Suppresion de \n $name.",
             "type" => "warning",
             "data" => [
                 "student_id" => $id

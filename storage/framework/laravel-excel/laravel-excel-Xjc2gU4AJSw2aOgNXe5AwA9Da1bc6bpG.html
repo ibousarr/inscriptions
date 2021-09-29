@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CEM Médiègue | CEM Médiègue | Gestion des inscriptions</title>
+
+    <link rel="stylesheet" href="/css/app.css" />
+
+    <!-- Livewire Styles -->
+<style >
+    [wire\:loading], [wire\:loading\.delay], [wire\:loading\.inline-block], [wire\:loading\.inline], [wire\:loading\.block], [wire\:loading\.flex], [wire\:loading\.table], [wire\:loading\.grid] {
+        display: none;
+    }
+
+    [wire\:offline] {
+        display: none;
+    }
+
+    [wire\:dirty]:not(textarea):not(input):not(select) {
+        display: none;
+    }
+
+    input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill {
+        animation-duration: 50000s;
+        animation-name: livewireautofill;
+    }
+
+    @keyframes livewireautofill { from {} }
+</style>
+
+</head>
+<body class="hold-transition">
+<div class="wrapper">
+
+  <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <!-- Right navbar links -->
+  <ul class="navbar-nav ml-auto">
+    <!-- Notifications Dropdown Menu -->
+    <li class="nav-item dropdown">
+      <a class="nav-link" data-toggle="dropdown" href="#">
+        <i class="far fa-bell"></i>
+        <span class="badge badge-warning navbar-badge">15</span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <span class="dropdown-header">15 Notifications</span>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item">
+          <i class="fas fa-envelope mr-2"></i> 4 new messages
+          <span class="float-right text-muted text-sm">3 mins</span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+        <i class="fas fa-expand-arrows-alt"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+        <i class="fas fa-user"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link">
+      <span class="brand-text font-weight-bold" style="font-size: 1.3em;"><b>CEM Médiègue</b></span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+              <img src="http://127.0.0.1:8000/images/ibousarr.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Ibrahima Sarr</a>
+        </div>
+      </div>
+
+
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+            <a href="http://127.0.0.1:8000" class="nav-link ">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                Accueil
+              </p>
+            </a>
+        </li>
+
+        
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Tableau de bord
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="nav-icon fas fa-chart-line"></i>
+                  <p>Vue globale</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-swatchbook"></i>
+                  <p>Locations</p>
+                </a>
+              </li>
+            </ul>
+        </li>
+        
+
+       
+        <li class="nav-item ">
+            <a href="#" class="nav-link ">
+              <i class=" nav-icon fas fa-user-shield"></i>
+              <p>
+                Habilitations
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">                
+                  <li class="nav-item ">
+                        <a
+                        href="http://127.0.0.1:8000/habilitations/utilisateurs"
+                        class="nav-link "
+                        >
+                              <i class=" nav-icon fas fa-users-cog"></i>
+                              <p>Utilisateurs</p>
+                        </a>
+                  </li>
+                  <li class="nav-item">
+                        <a href="#" class="nav-link">
+                              <i class="nav-icon fas fa-fingerprint"></i>
+                              <p>Roles et permissions</p>
+                        </a>
+                  </li>
+            </ul>
+        </li>
+
+        <li class="nav-item ">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fas fa-sitemap"></i>
+                <p>
+                Gestion classes
+                <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a 
+                        href="http://127.0.0.1:8000/classes/classes" 
+                        class="nav-link "
+                    >
+                    <i class="nav-icon fas fa-list-ul"></i>
+                    <p>Classes</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-sliders-h"></i>
+                        <p>Listes</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item 
+                   
+                   "
+        >
+            <a href="#" class="nav-link 
+                         
+                        "
+            >
+                <i class="nav-icon fas fa-pen"></i>
+                <p>
+                Gestion Elèves
+                <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a 
+                        href="http://127.0.0.1:8000/students/liste" 
+                        class="nav-link "
+                    >
+                    <i class="nav-icon fas fa-list-ul"></i>
+                    <p>Liste des élèves</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a 
+                        href="http://127.0.0.1:8000/students/caisse" 
+                        class="nav-link "
+                    >
+                    <i class="nav-icon fas fa-sliders-h"></i>
+                    <p>Liste des inscriptions</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item 
+                  "
+        >
+            <a href="#" class="nav-link 
+                        "
+            >
+                <i class="nav-icon fas fa-pen"></i>
+                <p>
+                Gestion des absences
+                <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a 
+                        href="http://127.0.0.1:8000/students/absence" 
+                        class="nav-link "
+                    >
+                    <i class="nav-icon fas fa-list-ul"></i>
+                    <p>Liste des absences</p>
+                    </a>
+                </li>
+            
+            </ul>
+        </li>        
+    </ul>
+</nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        	<div class="row p-4 pt-1">
+        <div class="col-10">
+            <div class="card">
+                <div class="card-header text-white bg-gradient-info d-flex justify-content-between align-items-center ">
+                    <h2 class="card-title mr-6">
+                        <i class="fas fa-pen fa-2x mr-2"></i>
+                        Liste des Elèves
+                    </h2>
+                </div>
+
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0 table-striped" style="height: 550px;">
+                    
+                    <table class="table table-head-fixed">
+                        <thead>
+                            <tr>
+                                <th style="width:10%;">#</th>
+                                <th style="width:30%;">Nom complet</th>
+                                <th style="width:20%;">Né le</th>
+                                <th style="width:25%;">A</th>
+                                <th style="width:15%;">Classe</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                            <tr>
+                                    <td>1</td>
+                                    <td>Cecile Ullrich</td>
+                                    <td class="text-left">18/01/2002</td>
+                                    <td>South Emiliano</td>
+                                    <td>6è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>2</td>
+                                    <td>Jarred Williamson</td>
+                                    <td class="text-left">15/12/2003</td>
+                                    <td>Lake Federico</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>4</td>
+                                    <td>Krystina Eichmann</td>
+                                    <td class="text-left">07/03/2004</td>
+                                    <td>New Lia</td>
+                                    <td>4è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>5</td>
+                                    <td>Francesco Bruen</td>
+                                    <td class="text-left">11/03/2009</td>
+                                    <td>Kington</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>6</td>
+                                    <td>Marge Fisher</td>
+                                    <td class="text-left">31/08/2007</td>
+                                    <td>Theodoramouth</td>
+                                    <td>5è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>7</td>
+                                    <td>Elinore Vandervort</td>
+                                    <td class="text-left">29/01/2002</td>
+                                    <td>East Fleta</td>
+                                    <td>4è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>9</td>
+                                    <td>Hortense Gleason</td>
+                                    <td class="text-left">27/09/2006</td>
+                                    <td>Lake Christinaville</td>
+                                    <td>6è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>10</td>
+                                    <td>Lonnie Bogan</td>
+                                    <td class="text-left">10/08/2007</td>
+                                    <td>Lake Cortneyview</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>11</td>
+                                    <td>Marjorie Weber</td>
+                                    <td class="text-left">13/10/2010</td>
+                                    <td>Archbury</td>
+                                    <td>5è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>12</td>
+                                    <td>Noemy Berge</td>
+                                    <td class="text-left">15/06/2010</td>
+                                    <td>Litzyberg</td>
+                                    <td>5è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>13</td>
+                                    <td>Chelsea Schowalter</td>
+                                    <td class="text-left">21/06/2004</td>
+                                    <td>Wadeberg</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>15</td>
+                                    <td>Zaria Denesik</td>
+                                    <td class="text-left">04/07/2008</td>
+                                    <td>Heavenshire</td>
+                                    <td>5è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>16</td>
+                                    <td>Teresa Reinger</td>
+                                    <td class="text-left">24/10/2006</td>
+                                    <td>East Arely</td>
+                                    <td>4è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>18</td>
+                                    <td>Monty Bergnaum</td>
+                                    <td class="text-left">10/12/2008</td>
+                                    <td>South Billshire</td>
+                                    <td>4è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>19</td>
+                                    <td>Josiane Pfannerstill</td>
+                                    <td class="text-left">22/01/2007</td>
+                                    <td>Lake Elmoberg</td>
+                                    <td>6è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>20</td>
+                                    <td>Laisha Hamill</td>
+                                    <td class="text-left">22/12/2004</td>
+                                    <td>Hickleport</td>
+                                    <td>4è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>21</td>
+                                    <td>Ismael Hayes</td>
+                                    <td class="text-left">24/12/2003</td>
+                                    <td>Port Dillon</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>22</td>
+                                    <td>Darryl Miller</td>
+                                    <td class="text-left">21/10/2006</td>
+                                    <td>Bartonside</td>
+                                    <td>5è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>23</td>
+                                    <td>Santiago Boehm</td>
+                                    <td class="text-left">13/05/2002</td>
+                                    <td>East Keshawn</td>
+                                    <td>5è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>24</td>
+                                    <td>Rae Brekke</td>
+                                    <td class="text-left">03/01/2010</td>
+                                    <td>Port Tianna</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>25</td>
+                                    <td>Catalina Zulauf</td>
+                                    <td class="text-left">12/07/2008</td>
+                                    <td>New Armani</td>
+                                    <td>6è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>26</td>
+                                    <td>Daniella Streich</td>
+                                    <td class="text-left">22/03/2002</td>
+                                    <td>East Charlotte</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>27</td>
+                                    <td>Fabiola Shields</td>
+                                    <td class="text-left">16/04/2002</td>
+                                    <td>New Savion</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>28</td>
+                                    <td>Nella Collins</td>
+                                    <td class="text-left">27/08/2007</td>
+                                    <td>East Lenorechester</td>
+                                    <td>4è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>29</td>
+                                    <td>Ibrahima Sarr</td>
+                                    <td class="text-left">05/12/2010</td>
+                                    <td>North Vernon</td>
+                                    <td>3è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>31</td>
+                                    <td>Santina Wolff</td>
+                                    <td class="text-left">04/09/2009</td>
+                                    <td>East Brady</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>32</td>
+                                    <td>Burley Bayer</td>
+                                    <td class="text-left">25/01/2001</td>
+                                    <td>South Bertrandstad</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>33</td>
+                                    <td>Mohammad Boyle</td>
+                                    <td class="text-left">02/02/2003</td>
+                                    <td>Hackettfurt</td>
+                                    <td>3è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>34</td>
+                                    <td>Deon Koepp</td>
+                                    <td class="text-left">15/04/2006</td>
+                                    <td>Homenickview</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>36</td>
+                                    <td>Nina Zulauf</td>
+                                    <td class="text-left">15/04/2005</td>
+                                    <td>Douglasbury</td>
+                                    <td>5è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>38</td>
+                                    <td>Mable Zemlak</td>
+                                    <td class="text-left">05/10/2010</td>
+                                    <td>Gerholdview</td>
+                                    <td>4è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>39</td>
+                                    <td>Jaqueline D&#039;Amore</td>
+                                    <td class="text-left">26/12/2005</td>
+                                    <td>North Alfonsoport</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>40</td>
+                                    <td>Madilyn Howe</td>
+                                    <td class="text-left">24/03/2010</td>
+                                    <td>East Ashlynn</td>
+                                    <td>6è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>41</td>
+                                    <td>Dante Klocko</td>
+                                    <td class="text-left">08/05/2002</td>
+                                    <td>South Rafaelabury</td>
+                                    <td>4è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>43</td>
+                                    <td>Kenyon Rempel</td>
+                                    <td class="text-left">08/07/2004</td>
+                                    <td>Stromanton</td>
+                                    <td>3è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>44</td>
+                                    <td>Halie D&#039;Amore</td>
+                                    <td class="text-left">18/11/2008</td>
+                                    <td>DuBuquehaven</td>
+                                    <td>Suspension </td>
+                                </tr>
+                                                            <tr>
+                                    <td>45</td>
+                                    <td>Leilani Murphy</td>
+                                    <td class="text-left">12/11/2008</td>
+                                    <td>Lake Janabury</td>
+                                    <td>4è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>47</td>
+                                    <td>Eveline Kreiger</td>
+                                    <td class="text-left">29/06/2008</td>
+                                    <td>South Hailieton</td>
+                                    <td>5è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>48</td>
+                                    <td>Nella Schneider</td>
+                                    <td class="text-left">22/08/2004</td>
+                                    <td>East Kaia</td>
+                                    <td>Suspension </td>
+                                </tr>
+                                                            <tr>
+                                    <td>49</td>
+                                    <td>Americo Bruen</td>
+                                    <td class="text-left">21/11/2004</td>
+                                    <td>Port Savannah</td>
+                                    <td>4è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>50</td>
+                                    <td>Destany Lockman</td>
+                                    <td class="text-left">14/09/2005</td>
+                                    <td>South Douglas</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>51</td>
+                                    <td>Elda Hartmann</td>
+                                    <td class="text-left">02/03/2010</td>
+                                    <td>Casperview</td>
+                                    <td>Suspension </td>
+                                </tr>
+                                                            <tr>
+                                    <td>52</td>
+                                    <td>Sylvan Kutch</td>
+                                    <td class="text-left">01/07/2009</td>
+                                    <td>New Antoinette</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>53</td>
+                                    <td>Jace Krajcik</td>
+                                    <td class="text-left">27/07/2003</td>
+                                    <td>Mckenziemouth</td>
+                                    <td>6è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>54</td>
+                                    <td>Abdul Pacocha</td>
+                                    <td class="text-left">03/11/2001</td>
+                                    <td>Gladyceport</td>
+                                    <td>3è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>55</td>
+                                    <td>Sally Quitzon</td>
+                                    <td class="text-left">21/06/2001</td>
+                                    <td>Spencermouth</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>56</td>
+                                    <td>Alek Spinka</td>
+                                    <td class="text-left">28/04/2007</td>
+                                    <td>Maurinestad</td>
+                                    <td>4è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>57</td>
+                                    <td>Yoshiko Robel</td>
+                                    <td class="text-left">08/06/2005</td>
+                                    <td>West Gloriafort</td>
+                                    <td>Suspension </td>
+                                </tr>
+                                                            <tr>
+                                    <td>58</td>
+                                    <td>Elsie Rogahn</td>
+                                    <td class="text-left">20/11/2001</td>
+                                    <td>New Macfort</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>59</td>
+                                    <td>Christop Rosenbaum</td>
+                                    <td class="text-left">03/05/2008</td>
+                                    <td>Antonettemouth</td>
+                                    <td>Suspension </td>
+                                </tr>
+                                                            <tr>
+                                    <td>60</td>
+                                    <td>Elizabeth Steuber</td>
+                                    <td class="text-left">02/01/2006</td>
+                                    <td>Considineshire</td>
+                                    <td>Suspension </td>
+                                </tr>
+                                                            <tr>
+                                    <td>61</td>
+                                    <td>Jerod Rempel</td>
+                                    <td class="text-left">11/05/2008</td>
+                                    <td>Port Roelborough</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>62</td>
+                                    <td>Fletcher Grant</td>
+                                    <td class="text-left">28/05/2006</td>
+                                    <td>Hollyshire</td>
+                                    <td>4è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>63</td>
+                                    <td>Shanny Lemke</td>
+                                    <td class="text-left">24/02/2002</td>
+                                    <td>East Tyrell</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>64</td>
+                                    <td>Erling Fahey</td>
+                                    <td class="text-left">22/01/2008</td>
+                                    <td>Lake Jazmin</td>
+                                    <td>4è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>65</td>
+                                    <td>Brandi Dietrich</td>
+                                    <td class="text-left">07/01/2009</td>
+                                    <td>Pacochaside</td>
+                                    <td>Suspension </td>
+                                </tr>
+                                                            <tr>
+                                    <td>66</td>
+                                    <td>Gillian Farrell</td>
+                                    <td class="text-left">10/05/2010</td>
+                                    <td>South Emmitt</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>67</td>
+                                    <td>Lincoln Miller</td>
+                                    <td class="text-left">30/11/2007</td>
+                                    <td>Darianaland</td>
+                                    <td>6è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>68</td>
+                                    <td>Kelvin Rice</td>
+                                    <td class="text-left">13/09/2008</td>
+                                    <td>Florineborough</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>69</td>
+                                    <td>Oral Kunde</td>
+                                    <td class="text-left">25/12/2004</td>
+                                    <td>Lake Sophie</td>
+                                    <td>6è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>70</td>
+                                    <td>Madelyn Kunze</td>
+                                    <td class="text-left">15/10/2004</td>
+                                    <td>Rosenbaumburgh</td>
+                                    <td>Suspension </td>
+                                </tr>
+                                                            <tr>
+                                    <td>71</td>
+                                    <td>Otho Kutch</td>
+                                    <td class="text-left">16/08/2005</td>
+                                    <td>Lake Derrick</td>
+                                    <td>4è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>72</td>
+                                    <td>Orrin Konopelski</td>
+                                    <td class="text-left">01/05/2009</td>
+                                    <td>Adonisport</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>73</td>
+                                    <td>Denis Yundt</td>
+                                    <td class="text-left">18/09/2002</td>
+                                    <td>Marquardtside</td>
+                                    <td>5è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>74</td>
+                                    <td>Crystel Lehner</td>
+                                    <td class="text-left">26/05/2007</td>
+                                    <td>Fadelland</td>
+                                    <td>3è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>75</td>
+                                    <td>Garrick Herman</td>
+                                    <td class="text-left">19/01/2008</td>
+                                    <td>Lake Erinland</td>
+                                    <td>3è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>76</td>
+                                    <td>Winston Morissette</td>
+                                    <td class="text-left">08/06/2006</td>
+                                    <td>Pagacstad</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>77</td>
+                                    <td>Salma Cruickshank</td>
+                                    <td class="text-left">10/04/2006</td>
+                                    <td>South Nyaville</td>
+                                    <td>6è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>78</td>
+                                    <td>Easton Gutkowski</td>
+                                    <td class="text-left">28/01/2006</td>
+                                    <td>Jacklynfort</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>79</td>
+                                    <td>Hiram Cartwright</td>
+                                    <td class="text-left">14/08/2002</td>
+                                    <td>Augustusville</td>
+                                    <td>6è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>80</td>
+                                    <td>Shanie Schmeler</td>
+                                    <td class="text-left">16/05/2004</td>
+                                    <td>South Anabelside</td>
+                                    <td>4è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>81</td>
+                                    <td>Adolph Dibbert</td>
+                                    <td class="text-left">01/01/2008</td>
+                                    <td>Deckowton</td>
+                                    <td>6è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>82</td>
+                                    <td>Marilyne Runte</td>
+                                    <td class="text-left">17/07/2001</td>
+                                    <td>West Porterstad</td>
+                                    <td>4è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>83</td>
+                                    <td>Bill Renner</td>
+                                    <td class="text-left">05/04/2005</td>
+                                    <td>West Turnerburgh</td>
+                                    <td>4è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>84</td>
+                                    <td>David Smitham</td>
+                                    <td class="text-left">01/04/2004</td>
+                                    <td>Hilbertbury</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>85</td>
+                                    <td>Broderick Conroy</td>
+                                    <td class="text-left">27/06/2007</td>
+                                    <td>Giovannichester</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>86</td>
+                                    <td>Marcel Johnston</td>
+                                    <td class="text-left">19/11/2008</td>
+                                    <td>East Alyssonbury</td>
+                                    <td>4è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>87</td>
+                                    <td>Maverick Mertz</td>
+                                    <td class="text-left">04/01/2002</td>
+                                    <td>Adriannaburgh</td>
+                                    <td>6è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>88</td>
+                                    <td>Eulah Price</td>
+                                    <td class="text-left">03/12/2004</td>
+                                    <td>Devanteberg</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>89</td>
+                                    <td>Fletcher Harber</td>
+                                    <td class="text-left">12/10/2006</td>
+                                    <td>Braunhaven</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>90</td>
+                                    <td>Eden Bechtelar</td>
+                                    <td class="text-left">24/06/2010</td>
+                                    <td>South Aliviashire</td>
+                                    <td>5è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>91</td>
+                                    <td>Cristal White</td>
+                                    <td class="text-left">25/11/2006</td>
+                                    <td>Damionstad</td>
+                                    <td>4è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>92</td>
+                                    <td>Travon Mueller</td>
+                                    <td class="text-left">04/08/2007</td>
+                                    <td>Lake Giannitown</td>
+                                    <td>6è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>93</td>
+                                    <td>Preston Hauck</td>
+                                    <td class="text-left">21/07/2002</td>
+                                    <td>Lake Adrianastad</td>
+                                    <td>3è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>94</td>
+                                    <td>Melyssa Lang</td>
+                                    <td class="text-left">01/06/2004</td>
+                                    <td>Kuhlmanland</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>96</td>
+                                    <td>Juana Gusikowski</td>
+                                    <td class="text-left">06/04/2009</td>
+                                    <td>Quitzonborough</td>
+                                    <td>Suspension </td>
+                                </tr>
+                                                            <tr>
+                                    <td>97</td>
+                                    <td>Kris Kessler</td>
+                                    <td class="text-left">27/05/2009</td>
+                                    <td>Hettingerchester</td>
+                                    <td>Suspension </td>
+                                </tr>
+                                                            <tr>
+                                    <td>98</td>
+                                    <td>Giles Hammes</td>
+                                    <td class="text-left">12/03/2006</td>
+                                    <td>Violetside</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>99</td>
+                                    <td>Olen Smitham</td>
+                                    <td class="text-left">15/08/2002</td>
+                                    <td>East Allenview</td>
+                                    <td>5è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>100</td>
+                                    <td>Sherwood Hackett</td>
+                                    <td class="text-left">06/05/2001</td>
+                                    <td>East Tony</td>
+                                    <td>Suspension </td>
+                                </tr>
+                                                            <tr>
+                                    <td>101</td>
+                                    <td>Lucile Kozey</td>
+                                    <td class="text-left">07/12/2006</td>
+                                    <td>Feestbury</td>
+                                    <td>4è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>102</td>
+                                    <td>Quinten Homenick</td>
+                                    <td class="text-left">24/02/2002</td>
+                                    <td>North Tituschester</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>103</td>
+                                    <td>Yadira Bernhard</td>
+                                    <td class="text-left">03/06/2008</td>
+                                    <td>Paucekland</td>
+                                    <td>5è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>104</td>
+                                    <td>Adam Gaylord</td>
+                                    <td class="text-left">23/11/2004</td>
+                                    <td>West Annemouth</td>
+                                    <td>5è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>105</td>
+                                    <td>Dolores Russel</td>
+                                    <td class="text-left">04/04/2009</td>
+                                    <td>Lake Dell</td>
+                                    <td>6è A </td>
+                                </tr>
+                                                            <tr>
+                                    <td>106</td>
+                                    <td>Jarret O&#039;Connell</td>
+                                    <td class="text-left">02/01/2006</td>
+                                    <td>Weissnatchester</td>
+                                    <td>3è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>107</td>
+                                    <td>Katrina McGlynn</td>
+                                    <td class="text-left">20/10/2008</td>
+                                    <td>Port Ashtynside</td>
+                                    <td>4è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>108</td>
+                                    <td>Ruben Kessler</td>
+                                    <td class="text-left">12/08/2004</td>
+                                    <td>Port Trenton</td>
+                                    <td>4è B </td>
+                                </tr>
+                                                            <tr>
+                                    <td>109</td>
+                                    <td>Jayme Donnelly</td>
+                                    <td class="text-left">17/11/2001</td>
+                                    <td>New Pamelachester</td>
+                                    <td>Suspension </td>
+                                </tr>
+                                                            <tr>
+                                    <td>110</td>
+                                    <td>Kyle Quitzon</td>
+                                    <td class="text-left">21/10/2010</td>
+                                    <td>South Elliotmouth</td>
+                                    <td>Suspension </td>
+                                </tr>
+                                                    </tbody>
+                    </table>
+                    <!-- /.card-body -->
+                    <div class="card-footer">                        
+                        <h3>Le Principal</h3>
+                    </div>
+                </div>
+                
+            </div>
+                     
+                <!-- /.card -->
+        </div>
+    </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+<!-- Control sidebar content goes here -->
+<div class="bg-dark">
+    <div class="card-body bg-dark box-profile">
+    <div class="text-center">
+        <img class="profile-user-img img-fluid img-circle" src="http://127.0.0.1:8000/images/ibousarr.jpg" alt="User profile picture">
+    </div>
+
+    <h3 class="profile-username text-center ellipsis">Ibrahima Sarr </h3>
+
+    <p class="text-muted text-center">superadmin</p>
+
+    <ul class="list-group bg-dark mb-3">
+        <li class="list-group-item">
+        <a href="#" class="d-flex align-items-center "><i class="fa fa-lock pr-2"></i><b >Mot de passe</b> </a>
+        </li>
+        <li class="list-group-item">
+        <a href="#" class="d-flex align-items-center"><i class="fa fa-user pr-2"></i><b >Mon profile</b> </a>
+        </li>
+    </ul>
+
+    <a class="btn btn-primary btn-block" href="http://127.0.0.1:8000/logout"
+        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+        Déconnexion
+    </a>
+
+    <form id="logout-form" action="http://127.0.0.1:8000/logout" method="POST" class="d-none">
+        <input type="hidden" name="_token" value="rp7MKTMV3tEaXj77hy4Lv6X8yRnYpY7RUE5lvOxD">    </form>
+    </div>
+    <!-- /.card-body -->
+</div>
+</aside>
+  <!-- /.control-sidebar -->
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="float-right d-none d-sm-inline">
+      <b>Anything you want can be done</b>
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2021 <a href="https://mediegue.ibousarr.com">https://mediegue.ibousarr.com</a>.</strong> All rights reserved.
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<script src="/js/app.js"></script>
+
+<!-- Livewire Scripts -->
+
+<script src="/livewire/livewire.js?id=83b555bb3e243bc25f35" data-turbo-eval="false" data-turbolinks-eval="false"></script>
+<script data-turbo-eval="false" data-turbolinks-eval="false">
+    if (window.livewire) {
+	    console.warn('Livewire: It looks like Livewire\'s @livewireScripts JavaScript assets have already been loaded. Make sure you aren\'t loading them twice.')
+	}
+
+    window.livewire = new Livewire();
+    window.livewire.devTools(true);
+    window.Livewire = window.livewire;
+    window.livewire_app_url = '';
+    window.livewire_token = 'rp7MKTMV3tEaXj77hy4Lv6X8yRnYpY7RUE5lvOxD';
+
+	/* Make sure Livewire loads first. */
+	if (window.Alpine) {
+	    /* Defer showing the warning so it doesn't get buried under downstream errors. */
+	    document.addEventListener("DOMContentLoaded", function () {
+	        setTimeout(function() {
+	            console.warn("Livewire: It looks like AlpineJS has already been loaded. Make sure Livewire\'s scripts are loaded before Alpine.\\n\\n Reference docs for more info: http://laravel-livewire.com/docs/alpine-js")
+	        })
+	    });
+	}
+
+	/* Make Alpine wait until Livewire is finished rendering to do its thing. */
+    window.deferLoadingAlpine = function (callback) {
+        window.addEventListener('livewire:load', function () {
+            callback();
+        });
+    };
+
+    let started = false;
+
+    window.addEventListener('alpine:initializing', function () {
+        if (! started) {
+            window.livewire.start();
+
+            started = true;
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        if (! started) {
+            window.livewire.start();
+
+            started = true;
+        }
+    });
+</script>
+
+</body>
+</html>

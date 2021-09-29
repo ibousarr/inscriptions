@@ -44,8 +44,13 @@
                       <td>{{ $classe->libClasse}}</td>
                       <td class="text-left"><span class="tag tag-success">{{ $classe->nbTables }}</span></td>
                       <td class="text-center">
-                        <button class="btn btn-link" wire:click="goToEditClasse({{$classe->id}})"> <i class="far fa-edit"></i> </button>
-                        <button class="btn btn-link text-danger" wire:click="confirmDelete('{{ $classe->libClasse }}', {{$classe->id}})"> <i class="far fa-trash-alt"></i> </button>
+                        @if($classe->inscriptions->count()>0)
+                            <button class="btn btn-link" wire:click="goToEditClasse({{$classe->id}})"> <i class="far fa-edit"></i> </button>
+                            <span class="badge badge-pill badge-success">{{ $classe->inscriptions->count() }} inscrits)</span>
+                        
+                        @else
+                            <button class="btn btn-link text-danger" wire:click="confirmDelete('{{ $classe->libClasse }}', {{$classe->id}})"> <i class="far fa-trash-alt"></i> </button>
+                        @endif
                       </td>
                     </tr>
                     @endforeach

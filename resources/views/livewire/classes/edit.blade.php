@@ -27,8 +27,16 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div class="form-group flex-grow-1 mr-2">
+                            <label >Niveau</label>
+                            <input type="text" wire:model="editClasse.niveau" class="form-control @error('editClasse.niveau') is-invalid @enderror">
+
+                            @error("editClasse.niveau")
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                         <div class="form-group flex-grow-1">
-                            <label >Nombre de tables disponibles</label>
+                            <label >Nombre de tables</label>
                             <input type="text" wire:model="editClasse.nbTables" class="form-control @error('editClasse.nbTables') is-invalid @enderror">
 
                             @error("editClasse.nbTables")
