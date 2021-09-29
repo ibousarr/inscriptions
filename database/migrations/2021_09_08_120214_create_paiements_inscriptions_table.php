@@ -32,6 +32,6 @@ class CreatePaiementsInscriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paiements');
+        Schema::dropIfExists('paiements_inscriptions');
     }
 }
