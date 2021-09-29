@@ -17,6 +17,7 @@ class CreateClasseRoomsTable extends Migration
             $table->id();
             $table->unsignedInteger('refClasse')->unique();
             $table->string('libClasse');
+            $table->enum('niveau', ["autre", "Troisième", "Quatrième", "Cinquième", 'Sixième'])->nullable();
             $table->integer('nbTables')->nullable();
             $table->timestamps();
         });
