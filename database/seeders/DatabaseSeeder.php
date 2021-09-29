@@ -144,16 +144,16 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $classes = [
-            ['10', 'Transit', '0', 'autre'],
-            ['11', 'Suspension', '0', 'autre'],
-            ['31', '3è A', '25', 'Troisième'],
-            ['32', '3è B', '25', 'Troisième'],
-            ['41', '4è A', '25', 'Quatrième'],
-            ['42', '4è B', '25', 'Quatrième'],
-            ['51', '5è A', '25', 'Cinquième'],
-            ['52', '5è B', '25', 'Cinquième'],
-            ['61', '6è A', '25', 'Sixième'],
-            ['62', '6è B', '25', 'Sixième'],            
+            ['10', 'Transit', 'autre', '0'],
+            ['11', 'Suspension', 'autre', '0'],
+            ['31', '3è A', 'Troisième', '25'],
+            ['32', '3è B', 'Troisième', '25'],
+            ['41', '4è A', 'Quatrième', '25'],
+            ['42', '4è B', 'Quatrième', '25'],
+            ['51', '5è A', 'Cinquième', '25'],
+            ['52', '5è B', 'Cinquième', '25'],
+            ['61', '6è A', 'Sixième', '25'],
+            ['62', '6è B', 'Sixième', '25'],            
         ];
          
         foreach($classes as $classe) {
