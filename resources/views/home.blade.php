@@ -1,20 +1,124 @@
 @extends("layouts.master")
 
 @section("contenu")
-    <div class="row">
-    <div class="col-12 p-4">
-        <div class="jumbotron ">
-                <h1 class="display-3">Bienvenu, <strong>{{userFullName()}} </strong></h1>
-                @foreach(auth()->user()->roles as $role)
-                <p>{{$role->nom}}</p>
-                @endforeach
-                <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                <hr class="my-4">
-                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-                </p>
+<div class="container-fluid">
+    {{-- Order Statictics --}}
+    <div class="row mt-4">
+        <div class="card col-md-12">
+            <div class="card-header">
+                <h3 class="card-title"><i class="nav-icon fa fa-cart-arrow-down"></i> Site Statistics</h3>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>25</h3>
+
+                    <p>Visits Today</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>124</h3>
+
+                    <p>Visits This Month</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>231</h3>
+
+                    <p>Total Visits</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+
+    {{-- Site Statictics --}}
+    <div class="row mt-4">
+        <div class="card col-md-12">
+            <div class="card-header">
+                <h3 class="card-title"><i class="nav-icon fa fa-line-chart"></i> Data Statistics</h3>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3></h3>
+
+                    <p>Total Categories</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                <a href="" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3></h3>
+
+                    <p>Total Feedbacks</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3></h3>
+
+                    <p>Total Doctors</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a href="" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3></h3>
+
+                    <p>Total Sliders</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
         </div>
     </div>
 </div>
 @endsection
+
+

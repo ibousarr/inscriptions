@@ -43,10 +43,10 @@ class Articles extends Component
         }
 
         return [
-            'editArticle.nom' => 'required',
-            'editArticle.noSerie' => 'required',
-            'editArticle.estDisponible' => 'number',
-            'editArticle.type_article_id' => 'required',
+            'newArticle.nom' => 'required',
+            'newArticle.noSerie' => 'required',
+            'newArticle.estDisponible' => 'number',
+            'newArticle.type_article_id' => 'required',
         ];
     }
 

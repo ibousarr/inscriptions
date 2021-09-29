@@ -1,11 +1,11 @@
 <?php
 use Illuminate\Support\Str;
-
+use App\Models\Absence;
 
 define("PAGELIST", "liste");
 define("PAGECREATEFORM", "create");
 define("PAGEEDITFORM", "edit");
-
+define("PAGEVOIR", "voir");
 define("DEFAULTPASSOWRD", "password");
 
 
@@ -35,6 +35,17 @@ function setMenuActive($route){
 function contains($container, $contenu){
     return Str::contains($container, $contenu);
 }
+
+function nbAbsences($id = null)
+    {
+        if($id == null){
+            $nb = Absence::count();
+        }else{
+            $nb = Absence::where('classe_room_id', $id)->count();
+        }
+        
+        return $nb;
+    }
 
 function getRolesName(){
     $rolesName = "";

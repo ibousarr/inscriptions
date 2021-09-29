@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaiementsTable extends Migration
+class CreateAnneeScolairesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreatePaiementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('paiements_inscriptions', function (Blueprint $table) {
+        Schema::create('annee_scolaires', function (Blueprint $table) {
             $table->id();
-            $table->integer("montantPaye");
-            $table->dateTime("datePaiement");
-            $table->foreignId("user_id")->constrained();
-            $table->foreignId("inscription_id")->constrained();
+            $table->string('annee')->unique();            
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreatePaiementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paiements');
+        Schema::dropIfExists('annee_scolaires');
     }
 }

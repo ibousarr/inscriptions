@@ -1,9 +1,15 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EssaiController;
+use App\Http\Controllers\AbsenceController;
 use App\Http\Livewire\Utilisateurs;
 use App\Http\Livewire\Articles;
+use App\Http\Livewire\Classes\ClasseRooms;
 use App\Models\Article;
+use App\Http\Livewire\Students\Students;
+use App\Http\Livewire\Absences\Absences;
+use App\Http\Livewire\Inscriptions\Inscriptions;
 use App\Models\TypeArticle;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +28,10 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('/essai', EssaiController::class);
+
+Route::post('/absences', [App\Http\Controllers\AbsenceController::class, 'store'])->name('absences.store');
 
 // Le groupe des routes relatives aux administrateurs uniquement
 Route::group([
@@ -47,7 +57,35 @@ Route::group([
         Route::get('articles', Articles::class)->name('articles.index');
     });
 
+    Route::group([
+        "prefix" => "classes",
+        "as"     => "classes."   
+    ], function(){
+        Route::get('classes', ClasseRooms::class)->name('index');
+    });
 
+    Route::group([
+        "prefix" => "students",
+        "as"     => "students."   
+    ], function(){
+        Route::get('liste', Students::class)->name('index');
+    });
+
+    Route::group([
+        "prefix" => "students",
+        "as"     => "inscriptions."   
+    ], function(){
+        Route::get('caisse', Inscriptions::class)->name('index');
+    });
+
+    Route::group([
+        "prefix" => "students",
+        "as"     => "absences."   
+    ], function(){
+        Route::get('absence', Absences::class)->name('index');
+    });
+
+    
 });
 
 
